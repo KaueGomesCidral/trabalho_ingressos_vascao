@@ -24,6 +24,7 @@ public class SecurityConfig {
             )
             .httpBasic(AbstractHttpConfigurer::disable)
             .formLogin(AbstractHttpConfigurer::disable)
+            .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .cors(Customizer.withDefaults());
 
     return http.build();
