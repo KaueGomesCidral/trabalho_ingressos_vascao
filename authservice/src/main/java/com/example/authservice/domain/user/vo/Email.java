@@ -11,6 +11,10 @@ public class Email {
     @Column(name = "email", nullable = false, unique = true)
     private String value;
 
+    protected Email() {
+        // JPA requirement
+    }
+
     public Email(String value){
         this.value = normalize(value);
 
