@@ -22,7 +22,7 @@ public class PasswordLoginHandler {
     private final UserRepository userRepository;
     private final PasswordHasher passwordHasher;
 
-    public TokenResponse handle(String emailRaw, String passwordRaw) {
+    public TokenResponse handle(String emailRaw, String pwRaw) {
         Email email = Email.of(emailRaw);
         Optional<User> userOpt = userRepository.findByEmail(email.getValue());
 
@@ -31,7 +31,7 @@ public class PasswordLoginHandler {
         }
 
         User user = userOpt.get();
-        if (passwordHasher.matches(passwordRaw, user.getPassword())) {
+        if (passwordHasher.matches(pwRaw, user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Credencial Invalida");
         }
 
@@ -44,3 +44,4 @@ public class PasswordLoginHandler {
         );
     }
 }
+

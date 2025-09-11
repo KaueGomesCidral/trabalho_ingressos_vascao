@@ -1,6 +1,5 @@
 package com.example.authservice.domain.user.vo;
 
-import org.hibernate.validator.constraints.CodePointLength;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

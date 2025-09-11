@@ -6,7 +6,7 @@ import com.example.authservice.domain.user.vo.Role;
 import com.example.authservice.domain.user.vo.RoleType;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,11 +42,12 @@ public class User {
     @Embedded
     private Role role;
 
-    public User(String name, Email email, RoleType role, String pw){
+    public User(String name, String pw, Email email, RoleType role){
         this.name = name;
+        this.password = pw;
         this.email = email;
         this.role = Role.of(role);
-        this.password = pw;
+        
     }
 
     public void promoteTo(RoleType role){

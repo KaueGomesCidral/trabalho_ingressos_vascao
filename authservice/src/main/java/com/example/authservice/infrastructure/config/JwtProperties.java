@@ -17,3 +17,4 @@ public class JwtProperties {
     private long accessTtlSeconds = 900;
     private long refreshTtlSeconds = 2_592_000;
 }
+

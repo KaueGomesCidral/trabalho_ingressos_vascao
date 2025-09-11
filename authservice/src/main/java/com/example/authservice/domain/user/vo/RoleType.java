@@ -1,6 +1,5 @@
 package com.example.authservice.domain.user.vo;
 
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 
 import lombok.Getter;
 

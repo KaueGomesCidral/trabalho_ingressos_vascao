@@ -7,9 +7,8 @@ import com.example.authservice.domain.user.vo.Email;
 import com.example.authservice.domain.user.vo.RoleType;
 import com.example.authservice.interfaces.rest.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -17,14 +16,11 @@ public class RegisterUserHandler {
     private final UserRepository userRepository;
     private final PasswordHasher passwordHasher;
 
-    public UserResponse handle(String name, String email, String password) {
-        Email emailObj = Email.of(email);
-        if (userRepository.existsByEmail(email)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
-        }
+    public UserResponse handle(String name, String emailRaw, String password) {
+        Email email = Email.of(emailRaw);
 
-        String hashedPassword = passwordHasher.hash(password);
-        User user = new User(name, emailObj, RoleType.CUSTOMER, password);
+        String hash = passwordHasher.hash(password);
+        User user = new User(name, hash, email, RoleType.CUSTOMER);
 
         User savedUser = userRepository.save(user);
 
