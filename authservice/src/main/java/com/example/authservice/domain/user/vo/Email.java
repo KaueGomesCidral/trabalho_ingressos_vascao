@@ -12,7 +12,7 @@ public class Email {
     private String value;
 
     protected Email() {
-        // JPA requirement
+        
     }
 
     public Email(String value){

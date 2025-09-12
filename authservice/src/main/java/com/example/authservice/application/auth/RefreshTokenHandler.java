@@ -27,7 +27,7 @@ public class RefreshTokenHandler {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "refresh token é obrigatório");
         }
 
-        // Validate JWT signature and expiry (optional but recommended)
+        
         try {
             Algorithm alg = Algorithm.HMAC256(props.getSecret().getBytes(StandardCharsets.UTF_8));
             JWT.require(alg)
@@ -43,10 +43,10 @@ public class RefreshTokenHandler {
         RefreshToken rt = refreshRepo.findActiveByHash(hash, Instant.now())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "refresh inválido ou expirado"));
 
-        // Issue new pair (also persists new refresh)
+        
         TokenService.TokenPair pair = tokenService.issue(rt.getUser());
 
-        // Invalidate the old token (rotation)
+        
         refreshRepo.revoke(rt.getId());
 
         return pair;

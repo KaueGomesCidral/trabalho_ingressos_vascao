@@ -51,16 +51,15 @@ public class JwtTokenService implements TokenService {
             .withClaim("level", user.getRole().getValue().getLevel())
             .sign(algorithm);
 
-            
-            // --- gera refresh token "raw" (cliente) ---
+                    
             byte[] rnd = new byte[64];
             secureRandom.nextBytes(rnd);
             String refreshRaw = Base64.getUrlEncoder().withoutPadding().encodeToString(rnd);
 
-            // calcula hash para armazenar
+            
             String tokenHashHex = RefreshTokenHasher.sha256Hex(refreshRaw);
 
-            // cria e persiste RefreshToken (somente hash é salvo)
+            
             Instant refreshExpires = now.plusSeconds(props.getRefreshTtlSeconds());
             RefreshToken rt = new RefreshToken(user, new TokenHash(tokenHashHex), new ExpiresAt(refreshExpires));
             refreshTokenRepository.save(rt);
