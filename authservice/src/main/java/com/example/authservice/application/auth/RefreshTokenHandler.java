@@ -7,7 +7,6 @@ import com.example.authservice.domain.refresh.RefreshToken;
 import com.example.authservice.domain.refresh.RefreshTokenRepository;
 import com.example.authservice.infrastructure.config.JwtProperties;
 import com.example.authservice.infrastructure.security.RefreshTokenHasher;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,11 +15,16 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 @Service
-@RequiredArgsConstructor
 public class RefreshTokenHandler {
     private final RefreshTokenRepository refreshRepo;
     private final TokenService tokenService;
     private final JwtProperties props;
+
+    public RefreshTokenHandler(RefreshTokenRepository refreshRepo, TokenService tokenService, JwtProperties props) {
+        this.refreshRepo = refreshRepo;
+        this.tokenService = tokenService;
+        this.props = props;
+    }
 
     public TokenService.TokenPair refresh(String refreshTokenRaw) {
         if (refreshTokenRaw == null || refreshTokenRaw.isBlank()) {

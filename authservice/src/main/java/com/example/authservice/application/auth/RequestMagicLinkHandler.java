@@ -14,18 +14,23 @@ import com.example.authservice.domain.user.User;
 import com.example.authservice.domain.user.UserRepository;
 import com.example.authservice.domain.user.vo.Email;
 import com.example.authservice.infrastructure.config.AppProperties;
-import lombok.RequiredArgsConstructor;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Service
-@RequiredArgsConstructor
 public class RequestMagicLinkHandler {
     private final UserRepository userRepository;
     private final MagicLinkRepository magicLinkRepository;
     private final MailSender mailSender;
     private final AppProperties appProperties;
+
+    public RequestMagicLinkHandler(UserRepository userRepository, MagicLinkRepository magicLinkRepository, MailSender mailSender, AppProperties appProperties) {
+        this.userRepository = userRepository;
+        this.magicLinkRepository = magicLinkRepository;
+        this.mailSender = mailSender;
+        this.appProperties = appProperties;
+    }
 
     public record Result(boolean accepted) {};
 

@@ -6,15 +6,18 @@ import com.example.authservice.domain.user.UserRepository;
 import com.example.authservice.domain.user.vo.Email;
 import com.example.authservice.domain.user.vo.RoleType;
 import com.example.authservice.interfaces.rest.dto.UserResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
 @Service
-@RequiredArgsConstructor
 public class RegisterUserHandler {
     private final UserRepository userRepository;
     private final PasswordHasher passwordHasher;
+
+    public RegisterUserHandler(UserRepository userRepository, PasswordHasher passwordHasher) {
+        this.userRepository = userRepository;
+        this.passwordHasher = passwordHasher;
+    }
 
     public UserResponse handle(String name, String emailRaw, String password) {
         Email email = Email.of(emailRaw);

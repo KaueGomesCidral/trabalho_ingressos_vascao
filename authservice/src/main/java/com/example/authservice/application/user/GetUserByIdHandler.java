@@ -13,9 +13,12 @@ import com.example.authservice.interfaces.rest.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class GetUserByIdHandler {
     private final UserRepository userRepository;
+
+    public GetUserByIdHandler(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UserResponse handle(UUID id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));

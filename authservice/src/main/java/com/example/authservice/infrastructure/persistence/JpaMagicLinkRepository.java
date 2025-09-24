@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.example.authservice.domain.auth.MagicLink;
 import com.example.authservice.domain.auth.MagicLinkRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor

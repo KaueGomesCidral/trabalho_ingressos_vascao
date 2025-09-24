@@ -13,14 +13,17 @@ import com.example.authservice.domain.user.UserRepository;
 import com.example.authservice.domain.user.vo.Email;
 import com.example.authservice.interfaces.rest.dto.auth.TokenResponse;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class PasswordLoginHandler {
     private final TokenService tokenService;
     private final UserRepository userRepository;
     private final PasswordHasher passwordHasher;
+
+    public PasswordLoginHandler(TokenService tokenService, UserRepository userRepository, PasswordHasher passwordHasher) {
+        this.tokenService = tokenService;
+        this.userRepository = userRepository;
+        this.passwordHasher = passwordHasher;
+    }
 
     public TokenResponse handle(String emailRaw, String pwRaw) {
         Email email = Email.of(emailRaw);
