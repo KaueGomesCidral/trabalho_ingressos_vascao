@@ -3,6 +3,7 @@ package com.example.authservice.application.auth;
 import java.time.Instant;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.example.authservice.application.ports.MailSender;
@@ -19,18 +20,12 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Service
+@RequiredArgsConstructor
 public class RequestMagicLinkHandler {
     private final UserRepository userRepository;
     private final MagicLinkRepository magicLinkRepository;
     private final MailSender mailSender;
     private final AppProperties appProperties;
-
-    public RequestMagicLinkHandler(UserRepository userRepository, MagicLinkRepository magicLinkRepository, MailSender mailSender, AppProperties appProperties) {
-        this.userRepository = userRepository;
-        this.magicLinkRepository = magicLinkRepository;
-        this.mailSender = mailSender;
-        this.appProperties = appProperties;
-    }
 
     public record Result(boolean accepted) {};
 

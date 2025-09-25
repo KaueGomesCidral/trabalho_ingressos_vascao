@@ -20,6 +20,6 @@ public class JpaMagicLinkRepository implements MagicLinkRepository {
 
     @Override
     public Optional<MagicLink> findValidByHash(String hash, Instant now){
-        return jpa.findByHashedTokenValueAndConsumedAtIsNullAndExpiresAtValueIsGreaterThan(hash, now);
+        return jpa.findByHashedtokenValueAndConsumedAtIsNullAndExpiresAtValueIsGreaterThan(hash, now);
     }
 }
